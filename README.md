@@ -58,13 +58,15 @@ Reset the Keymap
 #### create(code, options)
 Create a new Keymap
 
-Options:
+##### options
 
-* callback - The function that will be invoked when the code is met
-* timeout - How long between key strokes before <code>reset</code> is called
+* `callback` - The function that will be invoked when the code is met
+* `timeout` - How long between key strokes before <code>reset</code> is called
 
 
-__NOTE:__ options can be either a function, or an object. If a function is provided it will be used as the callback option, and timeout will be the default.
+###### Note
+
+Options can be either a function, or an object. If a function is provided it will be used as the callback option, and timeout will be the default.
 
 
 ## License
