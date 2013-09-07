@@ -3,6 +3,43 @@ keymap.js
 
 JavaScript key mapper
 
+## Examples
+
+Create a Keymap using a single character:
+
+```javascript
+Keymap.create('j', function () { alert('next'); });
+Keymap.create('k', function () { alert('prev'); });
+```
+
+Create a Keymap using a character sequence:
+
+```javascript
+Keymap.create('foo', function () { alert('bar'); });
+```
+
+Create a Keymap using a single char code:
+
+```javascript
+Keymap.create(Keymap.keyCode.ESC, function () { alert('cancel'); });
+```
+
+Create a Keymap using a char code sequence:
+
+```javascript
+Keymap.create([
+	Keymap.keyCode.UP,
+	Keymap.keyCode.UP,
+	Keymap.keyCode.DOWN,
+	Keymap.keyCode.DOWN,
+    Keymap.keyCode.LEFT,
+    Keymap.keyCode.RIGHT,
+    Keymap.keyCode.LEFT,
+    Keymap.keyCode.RIGHT,
+    Keymap.keyCode.B,
+    Keymap.keyCode.A], function () { alert('konami'); });
+```
+
 ## API
 
 ### Instance methods
