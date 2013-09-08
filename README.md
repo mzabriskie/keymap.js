@@ -7,26 +7,26 @@ JavaScript key mapper
 
 Create a Keymap using a single character:
 
-```javascript
+```js
 Keymap.create('j', function () { alert('next'); });
 Keymap.create('k', function () { alert('prev'); });
 ```
 
 Create a Keymap using a character sequence:
 
-```javascript
+```js
 Keymap.create('foo', function () { alert('bar'); });
 ```
 
 Create a Keymap using a single char code:
 
-```javascript
+```js
 Keymap.create(Keymap.keyCode.ESC, function () { alert('cancel'); });
 ```
 
 Create a Keymap using a char code sequence:
 
-```javascript
+```js
 Keymap.create([
 	Keymap.keyCode.UP,
 	Keymap.keyCode.UP,
@@ -38,6 +38,16 @@ Keymap.create([
     Keymap.keyCode.RIGHT,
     Keymap.keyCode.B,
     Keymap.keyCode.A], function () { alert('konami'); });
+```
+
+By default `Keymap.create` auto enables the instance. There may be times when you don't want this behavior.
+
+```js
+// Create a Keymap that is disabled
+var keymap = Keymap.create(Keymap.keyCode.ESC, function () { alert('cancel'); }).disable();
+
+// Enable it at a later point
+keymap.enable();
 ```
 
 ## API
@@ -61,12 +71,12 @@ Create a new Keymap
 ##### options
 
 * `callback` - The function that will be invoked when the code is met
-* `timeout` - How long between key strokes before <code>reset</code> is called
+* `timeout` - How long between key strokes before `reset` is called
 
 
 ###### Note
 
-Options can be either a function, or an object. If a function is provided it will be used as the callback option, and timeout will be the default.
+Options can be either a function, or an object. If a function is provided it will be used as the callback option, and timeout will be the default (500ms).
 
 
 ## License
