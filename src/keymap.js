@@ -140,7 +140,7 @@
     };
 
     /**
-     * Static helper for creating a Keymap and auto enabling it
+     * Create a Keymap and auto enable it, unless explicitly specified not to
      * @param {Number|String|Array} code
      * @param {Object|Function} options
      * @returns {Keymap}
@@ -149,10 +149,16 @@
         if (typeof options === 'function') {
             options = {callback: options};
         }
-        return new Keymap(code, options).enable();
+
+        var km = new Keymap(code, options);
+        if (options.enabled !== false) {
+            km.enable();
+        }
+
+        return km;
     };
 
-    Keymap.version = '1.0.0';
+    Keymap.version = '1.0.1';
 
     // Constants for key codes
     Keymap.keyCode = {
