@@ -44,7 +44,10 @@ By default `Keymap.create` auto enables the instance. There may be times when yo
 
 ```js
 // Create a Keymap that is disabled
-var keymap = Keymap.create(Keymap.keyCode.ESC, function () { alert('cancel'); }).disable();
+var keymap = Keymap.create(Keymap.keyCode.ESC, {
+	callback: function () { alert('cancel'); },
+	enabled: false
+});
 
 // Enable it at a later point
 keymap.enable();
@@ -71,12 +74,13 @@ Create a new Keymap
 ##### options
 
 * `callback` - The function that will be invoked when the code is met
-* `timeout` - How long between key strokes before `reset` is called
+* `timeout` - How long between key strokes before `reset` is called (defaults to 500)
+* `enabled` - Whether or not the `Keymap` should be enabled (defaults to true)
 
 
 ###### Note
 
-Options can be either a function, or an object. If a function is provided it will be used as the callback option, and timeout will be the default (500ms).
+Options can be either a function, or an object. If a function is provided it will be used as the callback option, and other options will use default values.
 
 
 ## License
