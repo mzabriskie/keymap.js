@@ -128,7 +128,7 @@
         var target = e.target || e.srcElement;
         if (!REGEXP_INPUT.test(target.tagName) && e.keyCode === this.code[this.index]) {
             if (++this.index === this.code.length) {
-                this.callback();
+                this.callback(e);
                 this.reset();
             } else {
                 clearTimeout(this.timer);
@@ -158,7 +158,7 @@
         return km;
     };
 
-    Keymap.version = '1.0.1';
+    Keymap.version = '1.0.2';
 
     // Constants for key codes
     Keymap.keyCode = {
