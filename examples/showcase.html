@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Keymap</title>
+    <style type="text/css">
+        html {
+            font-family:"Lucida Grande","Tahoma","Verdana","Arial",sans-serif;
+        }
+        * {
+            box-sizing:border-box;
+            -moz-box-sizing:border-box;
+            -webkit-box-sizing:border-box;
+        }
+        #msgbox {
+            border-radius:5px;
+            background-color:#000000;
+            color:#ffffff;
+            font-size:200%;
+            text-align:center;
+            padding:50px;
+            position:absolute;
+            top:50%;
+            left:50%;
+            margin-top:-69px;
+            margin-left:-200px;
+            width:400px;
+
+            opacity:0;
+            transition:opacity 1s;
+            -o-transition:opacity 1s;
+            -ms-transition:opacity 1s;
+            -moz-transition:opacity 1s;
+            -webkit-transition:opacity 1s;
+        }
+        #msgbox.open {
+            opacity:.7;
+        }
+
+        div { padding:5px; }
+        kbd {
+            border:1px solid #dddddd;
+            border-bottom-color:#cccccc;
+            border-right-color:#cccccc;
+            border-radius:2px;
+
+            font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+            line-height:18px;
+            padding:1px 4px;
+            margin:0 2px;
+            min-width:22px;
+            text-align:center;
+            display:inline-block;
+
+            box-shadow:0 2px 5px 0 #e6e6e6;
+            -moz-box-shadow:0 2px 5px 0 #e6e6e6;
+            -webkit-box-shadow:0 2px 5px 0 #e6e6e6;
+
+            background-image:linear-gradient(#f1f1f1, #dddddd);
+            background-image:-o-linear-gradient(#f1f1f1, #dddddd);
+            background-image:-ms-linear-gradient(#f1f1f1, #dddddd);
+            background-image:-moz-linear-gradient(#f1f1f1, #dddddd);
+            background-image:-webkit-linear-gradient(#f1f1f1, #dddddd);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f1f1f1', endColorstr='#dddddd');
+        }
+
+        .win .mac, .mac .win { display:none; }
+    </style>
+</head>
+<body>
+    <h3>Try the following shortcuts:</h3>
+    <div><kbd>J</kbd></div>
+    <div><kbd>K</kbd></div>
+    <div><kbd>F</kbd><kbd>O</kbd><kbd>O</kbd></div>
+    <div><kbd>esc</kbd></div>
+    <div><kbd>shift</kbd><kbd>?</kbd></div>
+    <div class="win"><kbd>ctrl</kbd><kbd>Z</kbd></div>
+    <div class="win"><kbd>ctrl</kbd><kbd>X</kbd></div>
+    <div class="win"><kbd>ctrl</kbd><kbd>C</kbd></div>
+    <div class="win"><kbd>ctrl</kbd><kbd>V</kbd></div>
+    <div class="mac"><kbd>&#8984;</kbd><kbd>Z</kbd></div>
+    <div class="mac"><kbd>&#8984;</kbd><kbd>X</kbd></div>
+    <div class="mac"><kbd>&#8984;</kbd><kbd>C</kbd></div>
+    <div class="mac"><kbd>&#8984;</kbd><kbd>V</kbd></div>
+    <div><kbd>&#8593;</kbd><kbd>&#8593;</kbd><kbd>&#8595;</kbd><kbd>&#8595;</kbd><kbd>&#8592;</kbd><kbd>&#8594;</kbd><kbd>&#8592;</kbd><kbd>&#8594;</kbd><kbd>B</kbd><kbd>A</kbd></div>
+
+    <div id="msgbox"></div>
+
+    <script src="src/keymap.js"></script>
+    <script>
+        var m = document.getElementById('msgbox'), timer;
+        function msgbox(msg) {
+            clearTimeout(timer);
+
+            m.innerHTML = msg;
+            m.className = 'open';
+
+            timer = setTimeout(function () { m.className = ''; }, 1000);
+        }
+
+        // Single character code using the string literal value
+        Keymap.create('j', function () { msgbox('next'); });
+        Keymap.create('k', function () { msgbox('prev'); });
+
+        // Character code sequence using the string literal value
+        Keymap.create('foo', function () { msgbox('bar'); });
+
+        // Single character code using the key code value
+        Keymap.create(Keymap.keyCode.ESC, function () { msgbox('cancel'); });
+
+        // Character code sequence using the key code values
+        Keymap.create([Keymap.keyCode.SHIFT, Keymap.keyCode.QUESTION], function () { msgbox('help'); });
+        Keymap.create([
+            Keymap.keyCode.UP,
+            Keymap.keyCode.UP,
+            Keymap.keyCode.DOWN,
+            Keymap.keyCode.DOWN,
+            Keymap.keyCode.LEFT,
+            Keymap.keyCode.RIGHT,
+            Keymap.keyCode.LEFT,
+            Keymap.keyCode.RIGHT,
+            Keymap.keyCode.B,
+            Keymap.keyCode.A], function () { msgbox('konami'); });
+
+        // Conditional mappings for various platforms
+        if (navigator.platform.indexOf('Mac') > -1) {
+            document.body.className = 'mac';
+            Keymap.create([Keymap.keyCode.COMMAND, Keymap.keyCode.Z], function () { msgbox('undo'); });
+            Keymap.create([Keymap.keyCode.COMMAND, Keymap.keyCode.X], function () { msgbox('cut'); });
+            Keymap.create([Keymap.keyCode.COMMAND, Keymap.keyCode.C], function () { msgbox('copy'); });
+            Keymap.create([Keymap.keyCode.COMMAND, Keymap.keyCode.V], function () { msgbox('paste'); });
+        } else {
+            document.body.className = 'win';
+            Keymap.create([Keymap.keyCode.CTRL, Keymap.keyCode.Z], function () { msgbox('undo'); });
+            Keymap.create([Keymap.keyCode.CTRL, Keymap.keyCode.X], function () { msgbox('cut'); });
+            Keymap.create([Keymap.keyCode.CTRL, Keymap.keyCode.C], function () { msgbox('copy'); });
+            Keymap.create([Keymap.keyCode.CTRL, Keymap.keyCode.V], function () { msgbox('paste'); });
+        }
+    </script>
+</body>
+</html>
