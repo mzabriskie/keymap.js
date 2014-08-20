@@ -1,0 +1,30 @@
+{
+	"name": "keymap.js",
+	"description": "Utility for creating keyboard shortcuts",
+	"version": "1.0.2",
+	"license": "MIT",
+	"homepage": "https://github.com/mzabriskie/keymap.js",
+	"authors": [
+		"Matt Zabriskie"
+	],
+	"main": "keymap.js",
+	"moduleType": [
+		"amd",
+		"globals"
+	],
+	"keywords": [
+		"keymap",
+		"keycode",
+		"shortcut"
+	],
+	"ignore": [
+		"**/.*",
+		"*.iml",
+		"*.md",
+		"node_modules",
+		"bower_components",
+		"index.html",
+		"Gruntfile.js",
+		"package.json"
+	]
+}

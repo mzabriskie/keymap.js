@@ -2,6 +2,7 @@
 module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-update-json');
 
     grunt.initConfig({
         jshint: {
@@ -21,9 +22,24 @@ module.exports = function(grunt) {
                     'keymap.min.js': ['keymap.js']
                 }
             }
+        },
+
+        update_json: {
+            bower: {
+                src: 'package.json',
+                dest: 'bower.json',
+                fields: [
+                    'name',
+                    'description',
+                    'version',
+                    'homepage',
+                    'license',
+                    'keywords'
+                ]
+            }
         }
     });
 
     grunt.registerTask('default', ['jshint']);
-    grunt.registerTask('publish', ['jshint', 'uglify']);
+    grunt.registerTask('publish', ['jshint', 'uglify', 'update_json']);
 };
