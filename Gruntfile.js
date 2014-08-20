@@ -1,10 +1,13 @@
 /*global module:false*/
 module.exports = function(grunt) {
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-update-json');
+    require('load-grunt-tasks')(grunt);
 
     grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+        meta: {
+            banner: '/* <%= pkg.name %> v<%= pkg.version %> | (c) <%= grunt.template.today("yyyy") %> by Matt Zabriskie */\n'
+        },
+
         jshint: {
             all: ['Gruntfile.js', 'src/keymap.js']
         },
@@ -20,6 +23,18 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'keymap.min.js': ['keymap.js']
+                }
+            }
+        },
+
+        usebanner: {
+            main: {
+                options: {
+                    banner: '<%= meta.banner %>',
+                    linebreak: false
+                },
+                files: {
+                    src: ['keymap.min.js']
                 }
             }
         },
@@ -41,5 +56,5 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', ['jshint']);
-    grunt.registerTask('publish', ['jshint', 'uglify', 'update_json']);
+    grunt.registerTask('publish', ['jshint', 'uglify', 'usebanner', 'update_json']);
 };
