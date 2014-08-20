@@ -7,6 +7,10 @@
         html {
             font-family:"Lucida Grande","Tahoma","Verdana","Arial",sans-serif;
         }
+        body {
+            margin: 20px;
+        }
+
         * {
             box-sizing:border-box;
             -moz-box-sizing:border-box;
@@ -68,6 +72,7 @@
     </style>
 </head>
 <body>
+    <h1>keymap.js</h1>
     <h3>Try the following shortcuts:</h3>
     <div><kbd>J</kbd></div>
     <div><kbd>K</kbd></div>
@@ -86,7 +91,7 @@
 
     <div id="msgbox"></div>
 
-    <script src="../src/keymap.js"></script>
+    <script src="keymap.js"></script>
     <script>
         var m = document.getElementById('msgbox'), timer;
         function msgbox(msg) {
