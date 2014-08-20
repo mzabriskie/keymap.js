@@ -1,7 +1,6 @@
-keymap.js
-=========
+# keymap.js
 
-JavaScript key mapper
+Utility for creating keyboard shortcuts
 
 ## Examples
 
