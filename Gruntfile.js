@@ -9,20 +9,32 @@ module.exports = function(grunt) {
         },
 
         jshint: {
-            all: ['Gruntfile.js', 'src/keymap.js']
+            main: ['Gruntfile.js', 'src/keymap.js']
+        },
+
+        clean: {
+            main: 'dist/**'
+        },
+
+        copy: {
+            main: {
+                files: [
+                    {src: 'src/keymap.js', dest: 'dist/', expand: true, flatten: true}
+                ]
+            }
         },
 
         uglify: {
             main: {
                 options: {
                     sourceMap: true,
-                    sourceMapName: 'keymap.min.map',
+                    sourceMapName: 'dist/keymap.min.map',
                     beautify: {
                         'ascii_only': true
                     }
                 },
                 files: {
-                    'keymap.min.js': ['keymap.js']
+                    'dist/keymap.min.js': ['dist/keymap.js']
                 }
             }
         },
@@ -34,13 +46,13 @@ module.exports = function(grunt) {
                     linebreak: false
                 },
                 files: {
-                    src: ['keymap.min.js']
+                    src: ['dist/keymap.min.js']
                 }
             }
         },
 
         update_json: {
-            bower: {
+            main: {
                 src: 'package.json',
                 dest: 'bower.json',
                 fields: [
@@ -52,9 +64,26 @@ module.exports = function(grunt) {
                     'keywords'
                 ]
             }
+        },
+
+        replace: {
+            main: {
+                options: {
+                    patterns: [
+                        {
+                            match: 'version',
+                            replacement: '<%= pkg.version %>'
+                        }
+                    ]
+                },
+                files: [
+                    {src: 'dist/keymap.js', dest: 'dist/', expand: true, flatten: true},
+                    {src: 'dist/keymap.min.js', dest: 'dist/', expand: true, flatten: true}
+                ]
+            }
         }
     });
 
     grunt.registerTask('default', ['jshint']);
-    grunt.registerTask('publish', ['jshint', 'uglify', 'usebanner', 'update_json']);
+    grunt.registerTask('publish', ['jshint', 'clean', 'copy', 'uglify', 'usebanner', 'replace', 'update_json']);
 };
