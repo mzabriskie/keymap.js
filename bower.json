@@ -1,7 +1,7 @@
 {
 	"name": "keymap.js",
 	"description": "Utility for creating keyboard shortcuts",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"license": "MIT",
 	"homepage": "https://github.com/mzabriskie/keymap.js",
 	"authors": [

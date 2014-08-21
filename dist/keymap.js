@@ -158,7 +158,7 @@
         return km;
     };
 
-    Keymap.version = '1.0.2';
+    Keymap.version = '1.0.3';
 
     // Constants for key codes
     Keymap.keyCode = {
