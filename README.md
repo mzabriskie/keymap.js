@@ -2,6 +2,12 @@
 
 Utility for creating keyboard shortcuts
 
+## Installing
+
+```bash
+$ bower install keymap.js
+```
+
 ## Examples
 
 Create a Keymap using a single character:
